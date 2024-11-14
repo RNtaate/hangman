@@ -11,7 +11,7 @@ const KeyBoard = () => {
             <button
               type="button"
               key={singleKey}
-              className="w-[13%] max-w-[50px] aspect-square bg-sky-500 text-white disabled:opacity-[0.4] shadow-md rounded-full"
+              className="w-[12%] max-w-[50px] aspect-square bg-sky-500 text-white disabled:opacity-[0.4] shadow-md rounded-full active:scale-150 select-none transition-all active:disabled:scale-100 disabled:cursor-not-allowed"
               disabled={singleKey == 'A' || singleKey == 'T' ? true : false}
             >
               {letterKeys[singleKey]}
