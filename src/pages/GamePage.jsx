@@ -1,10 +1,11 @@
 import React from 'react';
 import KeyBoard from '../components/KeyBoard';
+import HangmanCanvas from '../components/HangmanCanvas';
 
 const GamePage = () => {
   return (
     <div>
-      GamePage
+      <HangmanCanvas />
       <KeyBoard />
     </div>
   );
