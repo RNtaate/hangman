@@ -5,7 +5,7 @@ import PlayedWord from '../components/PlayedWord';
 
 const GamePage = () => {
   return (
-    <div>
+    <div className="flex flex-col">
       <HangmanCanvas />
       <PlayedWord />
       <KeyBoard />
