@@ -10,8 +10,8 @@ function HangmanCanvas() {
     const ctx = canvas.getContext('2d');
     console.log(wrapperRef.current.getBoundingClientRect().width);
     canvas.width = wrapperRef.current?.getBoundingClientRect().width;
-    canvas.height = wrapperRef.current?.getBoundingClientRect().width;
-    // canvas.height = innerHeight * 0.5;
+    // canvas.height = wrapperRef.current?.getBoundingClientRect().width;
+    canvas.height = innerHeight * 0.4;
     ctx.fillStyle = 'white';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
   };
@@ -19,48 +19,48 @@ function HangmanCanvas() {
   const handleDrawingStick = (canvas) => {
     let lineCoords = [
       {
-        mt: { x: canvas.width * 0.05, y: canvas.height * 0.9 },
-        lt: { x: canvas.width * 0.5, y: canvas.height * 0.9 },
+        mt: { x: canvas.width * 0.15, y: canvas.height * 0.9 },
+        lt: { x: canvas.width * 0.6, y: canvas.height * 0.9 },
       },
       {
-        mt: { x: canvas.width * 0.2, y: canvas.height * 0.9 },
-        lt: { x: canvas.width * 0.2, y: canvas.height * 0.2 },
+        mt: { x: canvas.width * 0.3, y: canvas.height * 0.9 },
+        lt: { x: canvas.width * 0.3, y: canvas.height * 0.2 },
       },
       {
-        mt: { x: canvas.width * 0.2, y: canvas.height * 0.2 },
-        lt: { x: canvas.width * 0.6, y: canvas.height * 0.2 },
+        mt: { x: canvas.width * 0.3, y: canvas.height * 0.2 },
+        lt: { x: canvas.width * 0.7, y: canvas.height * 0.2 },
       },
       {
-        mt: { x: canvas.width * 0.6, y: canvas.height * 0.2 },
-        lt: { x: canvas.width * 0.6, y: canvas.height * 0.3 },
+        mt: { x: canvas.width * 0.7, y: canvas.height * 0.2 },
+        lt: { x: canvas.width * 0.7, y: canvas.height * 0.3 },
       },
       {
         arc: true,
         circle: {
-          x: canvas.width * 0.6,
+          x: canvas.width * 0.7,
           y: canvas.height * 0.35,
           r: canvas.height * 0.05,
         },
       },
       {
-        mt: { x: canvas.width * 0.6, y: canvas.height * 0.4 },
-        lt: { x: canvas.width * 0.6, y: canvas.height * 0.55 },
+        mt: { x: canvas.width * 0.7, y: canvas.height * 0.4 },
+        lt: { x: canvas.width * 0.7, y: canvas.height * 0.55 },
       },
       {
-        mt: { x: canvas.width * 0.6, y: canvas.height * 0.44 },
-        lt: { x: canvas.width * 0.5, y: canvas.height * 0.48 },
+        mt: { x: canvas.width * 0.7, y: canvas.height * 0.44 },
+        lt: { x: canvas.width * 0.6, y: canvas.height * 0.48 },
       },
       {
-        mt: { x: canvas.width * 0.6, y: canvas.height * 0.44 },
-        lt: { x: canvas.width * 0.7, y: canvas.height * 0.48 },
+        mt: { x: canvas.width * 0.7, y: canvas.height * 0.44 },
+        lt: { x: canvas.width * 0.8, y: canvas.height * 0.48 },
       },
       {
-        mt: { x: canvas.width * 0.6, y: canvas.height * 0.55 },
-        lt: { x: canvas.width * 0.5, y: canvas.height * 0.7 },
+        mt: { x: canvas.width * 0.7, y: canvas.height * 0.55 },
+        lt: { x: canvas.width * 0.6, y: canvas.height * 0.7 },
       },
       {
-        mt: { x: canvas.width * 0.6, y: canvas.height * 0.55 },
-        lt: { x: canvas.width * 0.7, y: canvas.height * 0.7 },
+        mt: { x: canvas.width * 0.7, y: canvas.height * 0.55 },
+        lt: { x: canvas.width * 0.8, y: canvas.height * 0.7 },
       },
     ];
 
