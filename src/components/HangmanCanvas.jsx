@@ -38,29 +38,29 @@ function HangmanCanvas() {
         arc: true,
         circle: {
           x: canvas.width * 0.6,
-          y: canvas.height * 0.32,
-          r: canvas.height * 0.02,
+          y: canvas.height * 0.35,
+          r: canvas.height * 0.05,
         },
       },
       {
-        mt: { x: canvas.width * 0.6, y: canvas.height * 0.34 },
-        lt: { x: canvas.width * 0.6, y: canvas.height * 0.44 },
-      },
-      {
-        mt: { x: canvas.width * 0.6, y: canvas.height * 0.38 },
-        lt: { x: canvas.width * 0.55, y: canvas.height * 0.4 },
-      },
-      {
-        mt: { x: canvas.width * 0.6, y: canvas.height * 0.38 },
-        lt: { x: canvas.width * 0.65, y: canvas.height * 0.4 },
+        mt: { x: canvas.width * 0.6, y: canvas.height * 0.4 },
+        lt: { x: canvas.width * 0.6, y: canvas.height * 0.55 },
       },
       {
         mt: { x: canvas.width * 0.6, y: canvas.height * 0.44 },
-        lt: { x: canvas.width * 0.55, y: canvas.height * 0.48 },
+        lt: { x: canvas.width * 0.5, y: canvas.height * 0.48 },
       },
       {
         mt: { x: canvas.width * 0.6, y: canvas.height * 0.44 },
-        lt: { x: canvas.width * 0.65, y: canvas.height * 0.48 },
+        lt: { x: canvas.width * 0.7, y: canvas.height * 0.48 },
+      },
+      {
+        mt: { x: canvas.width * 0.6, y: canvas.height * 0.55 },
+        lt: { x: canvas.width * 0.5, y: canvas.height * 0.7 },
+      },
+      {
+        mt: { x: canvas.width * 0.6, y: canvas.height * 0.55 },
+        lt: { x: canvas.width * 0.7, y: canvas.height * 0.7 },
       },
     ];
 
@@ -76,6 +76,7 @@ function HangmanCanvas() {
         0,
         Math.PI * 2
       );
+      ctx.lineWidth = count > 3 ? 4 : 2;
       ctx.strokeStyle = count > 3 ? 'red' : 'black';
       ctx.stroke();
       ctx.closePath();
@@ -83,6 +84,7 @@ function HangmanCanvas() {
       ctx.beginPath();
       ctx.moveTo(lineCoords[count].mt.x, lineCoords[count].mt.y);
       ctx.lineTo(lineCoords[count].lt.x, lineCoords[count].lt.y);
+      ctx.lineWidth = count > 3 ? 4 : 2;
       ctx.strokeStyle = count > 3 ? 'red' : 'black';
       ctx.stroke();
       ctx.closePath();
