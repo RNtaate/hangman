@@ -3,9 +3,7 @@ import { getContextValues } from '../context/GameContextProvider';
 import drawOnCanvas from '../helpers/drawingOnCanvasHelpers';
 
 function HangmanCanvas() {
-  const { wrongGuessCount, setWrongGuessCount } = getContextValues();
-
-  const canvasRef = useRef(null);
+  const { wrongGuessCount, setWrongGuessCount, canvasRef } = getContextValues();
   const wrapperRef = useRef(null);
 
   const handleCanvas = (canvas) => {
@@ -15,13 +13,6 @@ function HangmanCanvas() {
     canvas.height = innerHeight * 0.4;
     ctx.fillStyle = 'white';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-  };
-
-  const handleDrawingHangman = (canvas, count) => {
-    if (count < 10) {
-      drawOnCanvas(canvas, count);
-      setWrongGuessCount((prev) => prev + 1);
-    }
   };
 
   useEffect(() => {
@@ -34,13 +25,6 @@ function HangmanCanvas() {
     <div className="p-4 w-full">
       <div ref={wrapperRef} className="w-full">
         <canvas ref={canvasRef} className="rounded-md shadow-md"></canvas>
-        <button
-          onClick={() => {
-            handleDrawingHangman(canvasRef.current, wrongGuessCount);
-          }}
-        >
-          Draw Stick
-        </button>
       </div>
     </div>
   );
