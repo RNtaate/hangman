@@ -31,7 +31,6 @@ const GameContextProvider = ({ children }) => {
   const winCheck = (guessedLetter) => {
     let holdObj = { ...wordObject };
     if (holdObj[guessedLetter]) delete holdObj[guessedLetter];
-    console.log('Wrong guess count inside winCheck', wrongGuessCount);
 
     //Check if the letter guessed exists in the word.
     if (wordObject[guessedLetter]) {

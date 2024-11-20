@@ -7,7 +7,6 @@ function HangmanCanvas() {
 
   const handleCanvas = (canvas) => {
     const ctx = canvas.getContext('2d');
-    console.log(wrapperRef.current.getBoundingClientRect().width);
     canvas.width = wrapperRef.current?.getBoundingClientRect().width;
     canvas.height = innerHeight * 0.4;
     ctx.fillStyle = 'white';
