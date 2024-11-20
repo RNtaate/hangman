@@ -1,7 +1,9 @@
 import { useState, useRef, useEffect } from 'react';
+import { getContextValues } from '../context/GameContextProvider';
+import drawOnCanvas from '../helpers/drawingOnCanvasHelpers';
 
 function HangmanCanvas() {
-  const [count, setCount] = useState(0);
+  const { wrongGuessCount, setWrongGuessCount } = getContextValues();
 
   const canvasRef = useRef(null);
   const wrapperRef = useRef(null);
@@ -10,86 +12,16 @@ function HangmanCanvas() {
     const ctx = canvas.getContext('2d');
     console.log(wrapperRef.current.getBoundingClientRect().width);
     canvas.width = wrapperRef.current?.getBoundingClientRect().width;
-    // canvas.height = wrapperRef.current?.getBoundingClientRect().width;
     canvas.height = innerHeight * 0.4;
     ctx.fillStyle = 'white';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
   };
 
-  const handleDrawingStick = (canvas) => {
-    let lineCoords = [
-      {
-        mt: { x: canvas.width * 0.15, y: canvas.height * 0.9 },
-        lt: { x: canvas.width * 0.6, y: canvas.height * 0.9 },
-      },
-      {
-        mt: { x: canvas.width * 0.3, y: canvas.height * 0.9 },
-        lt: { x: canvas.width * 0.3, y: canvas.height * 0.2 },
-      },
-      {
-        mt: { x: canvas.width * 0.3, y: canvas.height * 0.2 },
-        lt: { x: canvas.width * 0.7, y: canvas.height * 0.2 },
-      },
-      {
-        mt: { x: canvas.width * 0.7, y: canvas.height * 0.2 },
-        lt: { x: canvas.width * 0.7, y: canvas.height * 0.3 },
-      },
-      {
-        arc: true,
-        circle: {
-          x: canvas.width * 0.7,
-          y: canvas.height * 0.35,
-          r: canvas.height * 0.05,
-        },
-      },
-      {
-        mt: { x: canvas.width * 0.7, y: canvas.height * 0.4 },
-        lt: { x: canvas.width * 0.7, y: canvas.height * 0.55 },
-      },
-      {
-        mt: { x: canvas.width * 0.7, y: canvas.height * 0.44 },
-        lt: { x: canvas.width * 0.6, y: canvas.height * 0.48 },
-      },
-      {
-        mt: { x: canvas.width * 0.7, y: canvas.height * 0.44 },
-        lt: { x: canvas.width * 0.8, y: canvas.height * 0.48 },
-      },
-      {
-        mt: { x: canvas.width * 0.7, y: canvas.height * 0.55 },
-        lt: { x: canvas.width * 0.6, y: canvas.height * 0.7 },
-      },
-      {
-        mt: { x: canvas.width * 0.7, y: canvas.height * 0.55 },
-        lt: { x: canvas.width * 0.8, y: canvas.height * 0.7 },
-      },
-    ];
-
-    let ctx = canvas.getContext('2d');
-
-    if (lineCoords[count].arc) {
-      //drawCircle
-      ctx.beginPath();
-      ctx.arc(
-        lineCoords[count].circle.x,
-        lineCoords[count].circle.y,
-        lineCoords[count].circle.r,
-        0,
-        Math.PI * 2
-      );
-      ctx.lineWidth = count > 3 ? 4 : 2;
-      ctx.strokeStyle = count > 3 ? 'red' : 'black';
-      ctx.stroke();
-      ctx.closePath();
-    } else {
-      ctx.beginPath();
-      ctx.moveTo(lineCoords[count].mt.x, lineCoords[count].mt.y);
-      ctx.lineTo(lineCoords[count].lt.x, lineCoords[count].lt.y);
-      ctx.lineWidth = count > 3 ? 4 : 2;
-      ctx.strokeStyle = count > 3 ? 'red' : 'black';
-      ctx.stroke();
-      ctx.closePath();
+  const handleDrawingHangman = (canvas, count) => {
+    if (count < 10) {
+      drawOnCanvas(canvas, count);
+      setWrongGuessCount((prev) => prev + 1);
     }
-    setCount((prev) => prev + 1);
   };
 
   useEffect(() => {
@@ -104,7 +36,7 @@ function HangmanCanvas() {
         <canvas ref={canvasRef} className="rounded-md shadow-md"></canvas>
         <button
           onClick={() => {
-            handleDrawingStick(canvasRef.current);
+            handleDrawingHangman(canvasRef.current, wrongGuessCount);
           }}
         >
           Draw Stick
