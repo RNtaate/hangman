@@ -5,14 +5,30 @@ import { getContextValues } from '../context/GameContextProvider';
 const SingleKeyButton = ({ singleKeyLetter }) => {
   const buttonRef = useRef(null);
 
-  const { handleDrawingHangman, canvasRef, wrongGuessCount } =
-    getContextValues();
+  const {
+    handleDrawingHangman,
+    canvasRef,
+    wrongGuessCount,
+    wordObject,
+    originalWord,
+    setWordObject,
+  } = getContextValues();
 
   const handleButtonClick = () => {
     if (buttonRef) {
       setTimeout(() => {
         buttonRef.current.disabled = true;
-        handleDrawingHangman(canvasRef.current, wrongGuessCount);
+
+        if (wordObject[letterKeys[singleKeyLetter]]) {
+          setWordObject((prev) => {
+            let holdObj = { ...prev };
+            delete holdObj[letterKeys[singleKeyLetter]];
+            let newObj = { ...holdObj };
+            return newObj;
+          });
+        } else {
+          handleDrawingHangman(canvasRef.current, wrongGuessCount);
+        }
       }, 200);
     }
   };
