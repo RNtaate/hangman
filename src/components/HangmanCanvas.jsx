@@ -1,9 +1,8 @@
-import { useState, useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import { getContextValues } from '../context/GameContextProvider';
-import drawOnCanvas from '../helpers/drawingOnCanvasHelpers';
 
 function HangmanCanvas() {
-  const { wrongGuessCount, setWrongGuessCount, canvasRef } = getContextValues();
+  const { canvasRef } = getContextValues();
   const wrapperRef = useRef(null);
 
   const handleCanvas = (canvas) => {
