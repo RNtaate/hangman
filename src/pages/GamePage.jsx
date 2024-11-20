@@ -5,7 +5,7 @@ import PlayedWord from '../components/PlayedWord';
 
 const GamePage = () => {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col md:justify-between md:min-h-screen md:max-h-screen">
       <HangmanCanvas />
       <PlayedWord />
       <KeyBoard />

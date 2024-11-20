@@ -9,7 +9,7 @@ const PlayedWord = () => {
       {wordArray.map((letter, index) => {
         return (
           <div
-            className="border-b-2 border-black font-bold select-none min-w-[30px] max-w-[30px] aspect-square flex justify-center items-center"
+            className="border-b-2 border-slate-400 font-bold text-slate-600 select-none min-w-[30px] max-w-[30px] aspect-square flex justify-center items-center"
             key={`${letter + index}`}
           >
             {letter}
