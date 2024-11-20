@@ -12,12 +12,16 @@ const SingleKeyButton = ({ singleKeyLetter }) => {
     wordObject,
     originalWord,
     setWordObject,
+    winCheck,
   } = getContextValues();
 
   const handleButtonClick = () => {
     if (buttonRef) {
       setTimeout(() => {
         buttonRef.current.disabled = true;
+
+        //First check for a win, loss or game over situation.
+        winCheck(letterKeys[singleKeyLetter]);
 
         if (wordObject[letterKeys[singleKeyLetter]]) {
           setWordObject((prev) => {
