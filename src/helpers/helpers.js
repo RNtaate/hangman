@@ -13,3 +13,7 @@ export const wordToObjectConverter = (word) => {
 
   return letterObject;
 };
+
+export const waitSimulation = (time) => {
+  return new Promise((resolve) => setTimeout(resolve, time));
+};
