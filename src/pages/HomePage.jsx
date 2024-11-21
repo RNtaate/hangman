@@ -1,12 +1,20 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { playerModes } from '../services/letters';
 import { getContextValues } from '../context/GameContextProvider';
 
 const HomePage = () => {
-  const { setPlayerMode } = getContextValues();
+  const { setPlayerMode, setPlayGame } = getContextValues();
+
+  const navigate = useNavigate();
 
   const handlePlayerModeSelect = (e) => {
     setPlayerMode(e.target.value.toString());
+  };
+
+  const handleStartButton = () => {
+    setPlayGame(true);
+    navigate('/gamepage');
   };
 
   return (
@@ -27,6 +35,7 @@ const HomePage = () => {
         <button
           type="button"
           className="w-full bg-sky-400 p-1 text-white rounded-md text-xl"
+          onClick={handleStartButton}
         >
           Start
         </button>
