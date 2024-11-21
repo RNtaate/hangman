@@ -12,6 +12,7 @@ const GameContextProvider = ({ children }) => {
   const MAXIMUM_WRONG_COUNT = 10;
   const GUESSED_WORD = 'CHARACTERISTICS';
 
+  const [playGame, setPlayGame] = useState(false);
   const [wrongGuessCount, setWrongGuessCount] = useState(0);
   const [originalWord, setOriginalWord] = useState(GUESSED_WORD);
   const [wordObject, setWordObject] = useState({
@@ -56,6 +57,8 @@ const GameContextProvider = ({ children }) => {
 
   const contextValue = {
     MAXIMUM_WRONG_COUNT,
+    playGame,
+    setPlayGame,
     wrongGuessCount,
     setWrongGuessCount,
     canvasRef,

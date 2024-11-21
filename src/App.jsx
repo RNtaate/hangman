@@ -4,17 +4,28 @@ import './App.css';
 import HomePage from './pages/HomePage';
 import WordInput from './components/WordInput';
 import GamePage from './pages/GamePage';
-import GameContextProvider from './context/GameContextProvider';
+import GameContextProvider, {
+  getContextValues,
+} from './context/GameContextProvider';
+import ErrorPage from './pages/ErrorPage';
+import PrivateRoute from './pages/PrivateRoute';
 
 function App() {
   const router = createBrowserRouter([
     {
       path: '/',
       element: <HomePage />,
+      errorElement: <ErrorPage />,
     },
     {
-      path: '/gamepage',
-      element: <GamePage />,
+      path: '/',
+      element: <PrivateRoute />,
+      children: [
+        {
+          path: '/gamepage',
+          element: <GamePage />,
+        },
+      ],
     },
   ]);
 
