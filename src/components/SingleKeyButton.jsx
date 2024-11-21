@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import letterKeys from '../services/letters';
 import { getContextValues } from '../context/GameContextProvider';
 
@@ -13,6 +13,7 @@ const SingleKeyButton = ({ singleKeyLetter }) => {
     originalWord,
     setWordObject,
     winCheck,
+    keyBoardReset,
   } = getContextValues();
 
   const handleButtonClick = () => {
@@ -36,6 +37,12 @@ const SingleKeyButton = ({ singleKeyLetter }) => {
       }, 200);
     }
   };
+
+  useEffect(() => {
+    if (buttonRef.current != null && keyBoardReset) {
+      buttonRef.current.disabled = false;
+    }
+  }, []);
 
   return (
     <button

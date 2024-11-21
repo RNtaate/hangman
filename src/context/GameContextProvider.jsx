@@ -10,15 +10,17 @@ export const getContextValues = () => {
 
 const GameContextProvider = ({ children }) => {
   const MAXIMUM_WRONG_COUNT = 10;
+  const GUESSED_WORD = 'CHARACTERISTICS';
 
   const [wrongGuessCount, setWrongGuessCount] = useState(0);
-  const [originalWord, setOriginalWord] = useState('CHARACTERISTICS');
+  const [originalWord, setOriginalWord] = useState(GUESSED_WORD);
   const [wordObject, setWordObject] = useState({
     ...wordToObjectConverter(originalWord),
   });
   const [gameOver, setGameOver] = useState(false);
   const [winStatus, setWinStatus] = useState('');
   const [canvasReset, setCanvasReset] = useState(true);
+  const [keyBoardReset, setKeyBoardReset] = useState(true);
 
   const canvasRef = useRef(null);
 
@@ -69,6 +71,8 @@ const GameContextProvider = ({ children }) => {
     setWinStatus,
     canvasReset,
     setCanvasReset,
+    keyBoardReset,
+    setKeyBoardReset,
   };
 
   return (
