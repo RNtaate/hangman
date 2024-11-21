@@ -17,10 +17,12 @@ const SingleKeyButton = ({ singleKeyLetter }) => {
   } = getContextValues();
 
   const handleButtonClick = () => {
-    if (buttonRef) {
+    if (buttonRef.current) {
       setTimeout(() => {
         buttonRef.current.disabled = true;
+      }, 200);
 
+      setTimeout(() => {
         //First check for a win, loss or game over situation.
         winCheck(letterKeys[singleKeyLetter]);
 
@@ -34,7 +36,7 @@ const SingleKeyButton = ({ singleKeyLetter }) => {
         } else {
           handleDrawingHangman(canvasRef.current, wrongGuessCount);
         }
-      }, 200);
+      }, 50);
     }
   };
 
