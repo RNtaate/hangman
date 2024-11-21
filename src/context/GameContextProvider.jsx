@@ -18,6 +18,7 @@ const GameContextProvider = ({ children }) => {
   });
   const [gameOver, setGameOver] = useState(false);
   const [winStatus, setWinStatus] = useState('');
+  const [canvasReset, setCanvasReset] = useState(true);
 
   const canvasRef = useRef(null);
 
@@ -66,6 +67,8 @@ const GameContextProvider = ({ children }) => {
     setGameOver,
     winStatus,
     setWinStatus,
+    canvasReset,
+    setCanvasReset,
   };
 
   return (

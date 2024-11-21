@@ -2,7 +2,7 @@ import { useRef, useEffect } from 'react';
 import { getContextValues } from '../context/GameContextProvider';
 
 function HangmanCanvas() {
-  const { canvasRef } = getContextValues();
+  const { canvasRef, canvasReset, setCanvasReset } = getContextValues();
   const wrapperRef = useRef(null);
 
   const handleCanvas = (canvas) => {
@@ -10,14 +10,16 @@ function HangmanCanvas() {
     canvas.width = wrapperRef.current?.getBoundingClientRect().width;
     canvas.height = innerHeight * 0.4;
     ctx.fillStyle = 'white';
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillRect(0, 0, canvas.width, canvas.height);
   };
 
   useEffect(() => {
-    if (canvasRef.current != null) {
+    if (canvasRef.current != null && canvasReset) {
       handleCanvas(canvasRef.current);
+      setCanvasReset(false);
     }
-  }, []);
+  }, [canvasReset, setCanvasReset]);
 
   return (
     <div className="p-4 w-full">
