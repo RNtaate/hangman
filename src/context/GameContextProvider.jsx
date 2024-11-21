@@ -1,6 +1,7 @@
 import React, { useState, createContext, useContext, useRef } from 'react';
 import drawOnCanvas from '../helpers/drawingOnCanvasHelpers';
 import { wordToObjectConverter } from '../helpers/helpers';
+import { playerModes } from '../services/letters';
 
 export const GameContext = createContext();
 
@@ -13,6 +14,7 @@ const GameContextProvider = ({ children }) => {
   const GUESSED_WORD = 'CHARACTERISTICS';
 
   const [playGame, setPlayGame] = useState(false);
+  const [playerMode, setPlayerMode] = useState(playerModes.single);
   const [wrongGuessCount, setWrongGuessCount] = useState(0);
   const [originalWord, setOriginalWord] = useState(GUESSED_WORD);
   const [wordObject, setWordObject] = useState({

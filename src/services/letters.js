@@ -27,4 +27,9 @@ const letterKeys = {
   Z: 'Z',
 };
 
+export const playerModes = {
+  single: 'single',
+  double: 'two',
+};
+
 export default letterKeys;
