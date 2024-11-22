@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import KeyBoard from '../components/KeyBoard';
 import HangmanCanvas from '../components/HangmanCanvas';
 import PlayedWord from '../components/PlayedWord';
@@ -7,6 +8,7 @@ import { getContextValues } from '../context/GameContextProvider';
 import { waitSimulation, wordToObjectConverter } from '../helpers/helpers';
 import { playerModes } from '../services/letters';
 import WordInput from '../components/WordInput';
+import { queryClient } from '../main';
 
 const GamePage = () => {
   const {
@@ -20,13 +22,19 @@ const GamePage = () => {
     setWordObject,
     doublePlayerWordChoice,
     setDoublePlayerWordChoice,
+    playGame,
+    resetGame,
   } = getContextValues();
 
-  const { status, data, isLoading, error } = useQuery({
+  const navigate = useNavigate();
+  const innerQueryClient = useQueryClient(queryClient);
+
+  const { status, data, isLoading, error, isFetching, fetchStatus } = useQuery({
     queryKey: ['word'],
     queryFn: () => {
-      return waitSimulation(3000).then(() => {
-        return 'CHARACTERISTICS';
+      return waitSimulation(2000).then(() => {
+        console.log('I have fetched something');
+        return 'JAVA';
       });
     },
     enabled: playerMode != playerModes.double || doublePlayerWordChoice != '',
@@ -45,8 +53,14 @@ const GamePage = () => {
     }
   }, [status]);
 
-  if (isLoading) {
-    return <div>Loading ...</div>;
+  useEffect(() => {
+    if (!playGame) {
+      navigate('/', { replace: true });
+    }
+  }, []);
+
+  if (isLoading || isFetching) {
+    return <div>Loading ...{status}</div>;
   }
 
   if (status == 'error') {
@@ -66,6 +80,15 @@ const GamePage = () => {
         <div className="absolute top-0 left-0 right-0 bottom-0">
           GAME OVER
           <p>{winStatus}</p>
+          <button
+            onClick={() => {
+              innerQueryClient.clear();
+              innerQueryClient.invalidateQueries({ queryKey: ['word'] });
+              resetGame();
+            }}
+          >
+            Play Again
+          </button>
         </div>
       )}
       <HangmanCanvas />
