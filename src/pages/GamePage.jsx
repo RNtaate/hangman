@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import KeyBoard from '../components/KeyBoard';
@@ -14,11 +14,8 @@ const GamePage = () => {
   const {
     gameOver,
     winStatus,
-    wrongGuessCount,
     playerMode,
-    originalWord,
     setOriginalWord,
-    wordObject,
     setWordObject,
     doublePlayerWordChoice,
     setDoublePlayerWordChoice,
@@ -29,7 +26,7 @@ const GamePage = () => {
   const navigate = useNavigate();
   const innerQueryClient = useQueryClient(queryClient);
 
-  const { status, data, isLoading, error, isFetching, fetchStatus } = useQuery({
+  const { status, data, isLoading, error, isFetching } = useQuery({
     queryKey: ['word'],
     queryFn: () => {
       return waitSimulation(2000).then(() => {
