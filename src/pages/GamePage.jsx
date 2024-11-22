@@ -22,8 +22,6 @@ const GamePage = () => {
     setDoublePlayerWordChoice,
   } = getContextValues();
 
-  const [playerWordChoice, setPlayerWordChoice] = useState('');
-
   const { status, data, isLoading, error } = useQuery({
     queryKey: ['word'],
     queryFn: () => {
@@ -41,6 +39,10 @@ const GamePage = () => {
       setOriginalWord(word);
       setWordObject({ ...wordToObjectConverter(word) });
     }
+
+    if (status == 'error' && playerMode == playerModes.double) {
+      setDoublePlayerWordChoice('');
+    }
   }, [status]);
 
   if (isLoading) {
@@ -48,6 +50,9 @@ const GamePage = () => {
   }
 
   if (status == 'error') {
+    if (playerMode == playerModes.double) {
+      return <WordInput />;
+    }
     return <div>{JSON.stringify(error)}</div>;
   }
 
