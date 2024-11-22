@@ -55,6 +55,22 @@ const GameContextProvider = ({ children }) => {
     }
   };
 
+  const resetGame = ({ playGameBoolean = true } = {}) => {
+    setDoublePlayerWordChoice('');
+    setWrongGuessCount(0);
+    setOriginalWord('');
+    setWordObject({});
+    setGameOver(false);
+    setWinStatus('');
+    setCanvasReset(true);
+    setKeyBoardReset(true);
+
+    if (!playGameBoolean) {
+      setPlayGame(false);
+      setPlayerMode(playerModes.single);
+    }
+  };
+
   const contextValue = {
     MAXIMUM_WRONG_COUNT,
     playGame,
@@ -80,6 +96,7 @@ const GameContextProvider = ({ children }) => {
     setCanvasReset,
     keyBoardReset,
     setKeyBoardReset,
+    resetGame,
   };
 
   return (

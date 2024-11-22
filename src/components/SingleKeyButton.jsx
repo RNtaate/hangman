@@ -44,7 +44,7 @@ const SingleKeyButton = ({ singleKeyLetter }) => {
     if (buttonRef.current != null && keyBoardReset) {
       buttonRef.current.disabled = false;
     }
-  }, []);
+  }, [keyBoardReset]);
 
   return (
     <button
