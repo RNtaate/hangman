@@ -14,6 +14,7 @@ const GameContextProvider = ({ children }) => {
 
   const [playGame, setPlayGame] = useState(false);
   const [playerMode, setPlayerMode] = useState(playerModes.single);
+  const [doublePlayerWordChoice, setDoublePlayerWordChoice] = useState('');
   const [wrongGuessCount, setWrongGuessCount] = useState(0);
   const [originalWord, setOriginalWord] = useState('');
   const [wordObject, setWordObject] = useState({});
@@ -58,6 +59,10 @@ const GameContextProvider = ({ children }) => {
     MAXIMUM_WRONG_COUNT,
     playGame,
     setPlayGame,
+    playerMode,
+    setPlayerMode,
+    doublePlayerWordChoice,
+    setDoublePlayerWordChoice,
     wrongGuessCount,
     setWrongGuessCount,
     canvasRef,
