@@ -55,7 +55,7 @@ const GameContextProvider = ({ children }) => {
     }
   };
 
-  const resetGame = ({ playGameBoolean = true } = {}) => {
+  const resetGame = (playGameBoolean = true) => {
     setDoublePlayerWordChoice('');
     setWrongGuessCount(0);
     setOriginalWord('');

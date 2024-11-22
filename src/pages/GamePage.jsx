@@ -89,6 +89,16 @@ const GamePage = () => {
           >
             Play Again
           </button>
+          <button
+            className="block"
+            onClick={() => {
+              innerQueryClient.clear();
+              innerQueryClient.invalidateQueries({ queryKey: ['word'] });
+              resetGame(false);
+            }}
+          >
+            Quit
+          </button>
         </div>
       )}
       <HangmanCanvas />
