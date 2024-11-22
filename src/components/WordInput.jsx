@@ -4,11 +4,16 @@ import { getContextValues } from '../context/GameContextProvider';
 const WordInput = () => {
   const { setDoublePlayerWordChoice } = getContextValues();
   const [wordInput, setWordInput] = useState('');
+  const [wordError, setWordError] = useState('');
 
   const handleInputChange = (ev) => {
     let writtenWord = ev.target.value.trim();
-    if (writtenWord.length >= 3 && writtenWord.length <= 15) {
+    let regex = /^[A-Za-z]{3,15}$/;
+    if (regex.test(writtenWord)) {
       setWordInput(writtenWord.toUpperCase());
+      setWordError('');
+    } else {
+      setWordInput('');
     }
   };
 
@@ -16,16 +21,15 @@ const WordInput = () => {
     ev.preventDefault();
     if (wordInput) {
       setDoublePlayerWordChoice(wordInput);
+    } else {
+      setWordError('Word must have 3 to 15 letters without any spaces.');
     }
   };
 
   return (
     <section className="absolute top-0 right-0 bottom-0 left-0 bg-slate-900/[0.6] flex justify-center items-center px-5">
-      <div className="bg-white shadow-2xl rounded-md">
-        <form
-          className="flex flex-col px-3 gap-y-4 py-8"
-          onSubmit={handleSubmit}
-        >
+      <div className="bg-white shadow-2xl rounded-md px-3 pb-4">
+        <form className="flex flex-col gap-y-4 py-8" onSubmit={handleSubmit}>
           <label htmlFor="word" className="text-sm text-center text-slate-600">
             Player one, enter a word between 3 and 15 letters long:
           </label>
@@ -36,7 +40,7 @@ const WordInput = () => {
             autoComplete="off"
             maxLength={15}
             minLength={3}
-            className="outline-none border-b border-slate-400 py-2 caret-slate-400"
+            className="outline-none border-b border-slate-400 py-2 caret-slate-400 px-3"
             onChange={handleInputChange}
           />
           <button
@@ -46,6 +50,9 @@ const WordInput = () => {
             Go
           </button>
         </form>
+        {wordError && (
+          <div className="text-red-500 text-sm text-center">{wordError}</div>
+        )}
       </div>
     </section>
   );
