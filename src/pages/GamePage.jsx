@@ -41,7 +41,6 @@ const GamePage = () => {
 
   useEffect(() => {
     if (status == 'success') {
-      console.log(data.data);
       let word = '';
       if (playerMode == playerModes.double) {
         word = doublePlayerWordChoice.toString().toUpperCase();
@@ -53,9 +52,6 @@ const GamePage = () => {
     }
 
     if (status == 'error' && playerMode == playerModes.double) {
-      console.log(JSON.stringify(error));
-      console.log(error.status);
-      console.log(error.code);
       setDoublePlayerWordChoice('');
     }
   }, [status]);
