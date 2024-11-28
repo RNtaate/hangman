@@ -1,6 +1,6 @@
 import React, { useState, createContext, useContext, useRef } from 'react';
 import drawOnCanvas from '../helpers/drawingOnCanvasHelpers';
-import { wordToObjectConverter } from '../helpers/helpers';
+import { wordToObjectConverter } from '../helpers/helperMethods';
 import { playerModes } from '../services/letters';
 
 export const GameContext = createContext();

@@ -5,7 +5,10 @@ import KeyBoard from '../components/KeyBoard';
 import HangmanCanvas from '../components/HangmanCanvas';
 import PlayedWord from '../components/PlayedWord';
 import { getContextValues } from '../context/GameContextProvider';
-import { waitSimulation, wordToObjectConverter } from '../helpers/helpers';
+import {
+  waitSimulation,
+  wordToObjectConverter,
+} from '../helpers/helperMethods';
 import { playerModes } from '../services/letters';
 import WordInput from '../components/WordInput';
 import { queryClient } from '../main';
@@ -30,7 +33,6 @@ const GamePage = () => {
     queryKey: ['word'],
     queryFn: () => {
       return waitSimulation(2000).then(() => {
-        console.log('I have fetched something');
         return 'JAVA';
       });
     },
