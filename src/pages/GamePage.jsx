@@ -6,8 +6,8 @@ import HangmanCanvas from '../components/HangmanCanvas';
 import PlayedWord from '../components/PlayedWord';
 import { getContextValues } from '../context/GameContextProvider';
 import {
-  waitSimulation,
   wordToObjectConverter,
+  fetchOrConfirmWord,
 } from '../helpers/helperMethods';
 import { playerModes } from '../services/letters';
 import WordInput from '../components/WordInput';
@@ -32,8 +32,8 @@ const GamePage = () => {
   const { status, data, isLoading, error, isFetching } = useQuery({
     queryKey: ['word'],
     queryFn: () => {
-      return waitSimulation(2000).then(() => {
-        return 'JAVA';
+      return fetchOrConfirmWord(doublePlayerWordChoice).then((response) => {
+        return response;
       });
     },
     enabled: playerMode != playerModes.double || doublePlayerWordChoice != '',
@@ -41,8 +41,13 @@ const GamePage = () => {
 
   useEffect(() => {
     if (status == 'success') {
-      console.log(data);
-      let word = data.toString().toUpperCase();
+      console.log(data.data);
+      let word = '';
+      if (playerMode == playerModes.double) {
+        word = doublePlayerWordChoice.toString().toUpperCase();
+      } else {
+        word = data.data[0].toString().toUpperCase();
+      }
       setOriginalWord(word);
       setWordObject({ ...wordToObjectConverter(word) });
     }
