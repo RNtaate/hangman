@@ -53,6 +53,9 @@ const GamePage = () => {
     }
 
     if (status == 'error' && playerMode == playerModes.double) {
+      console.log(JSON.stringify(error));
+      console.log(error.status);
+      console.log(error.code);
       setDoublePlayerWordChoice('');
     }
   }, [status]);
@@ -64,14 +67,22 @@ const GamePage = () => {
   }, []);
 
   if (isLoading || isFetching) {
-    return <div>Loading ...{status}</div>;
+    return <div>Loading ...</div>;
   }
 
   if (status == 'error') {
     if (playerMode == playerModes.double) {
-      return <WordInput />;
+      let errorMessage =
+        'Sorry!, Something went wrong which could be a network error, please try again later.';
+      if (error.status == 404 || error.code == 'ERR_BAD_REQUEST') {
+        errorMessage =
+          "Sorry!, we don't seem to have that word in our dictionary. Please check your spelling or try another word.";
+      }
+      return <WordInput incomingError={errorMessage} />;
     }
-    return <div>{JSON.stringify(error)}</div>;
+    return (
+      <div>{`Sorry!, Something went wrong. It could be a network error. Please try again later. ${error.message}`}</div>
+    );
   }
 
   if (playerMode == playerModes.double && doublePlayerWordChoice == '') {

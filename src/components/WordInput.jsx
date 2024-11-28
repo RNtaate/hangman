@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { getContextValues } from '../context/GameContextProvider';
 
-const WordInput = () => {
+const WordInput = ({ incomingError = '' }) => {
   const { setDoublePlayerWordChoice } = getContextValues();
   const [wordInput, setWordInput] = useState('');
-  const [wordError, setWordError] = useState('');
+  const [wordError, setWordError] = useState(incomingError);
 
   const handleInputChange = (ev) => {
     let writtenWord = ev.target.value.trim();
@@ -30,7 +30,7 @@ const WordInput = () => {
 
   return (
     <section className="absolute top-0 right-0 bottom-0 left-0 bg-slate-900/[0.6] flex justify-center items-center px-5">
-      <div className="bg-white shadow-2xl rounded-md px-3 pb-4">
+      <div className="bg-white shadow-2xl rounded-md px-3 pb-4 flex flex-col max-w-[360px]">
         <form className="flex flex-col gap-y-4 py-8" onSubmit={handleSubmit}>
           <label htmlFor="word" className="text-sm text-center text-slate-600">
             Player one, enter a word between 3 and 15 letters long:
