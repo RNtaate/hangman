@@ -22,7 +22,9 @@ const WordInput = () => {
     if (wordInput) {
       setDoublePlayerWordChoice(wordInput);
     } else {
-      setWordError('Word must have 3 to 15 letters without any spaces.');
+      setWordError(
+        'Word must have 3 to 15 letters without any spaces, numbers, or special characters.'
+      );
     }
   };
 
