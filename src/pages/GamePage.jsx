@@ -18,6 +18,7 @@ const GamePage = () => {
     gameOver,
     winStatus,
     playerMode,
+    originalWord,
     setOriginalWord,
     setWordObject,
     doublePlayerWordChoice,
@@ -91,6 +92,7 @@ const GamePage = () => {
         <div className="absolute top-0 left-0 right-0 bottom-0">
           GAME OVER
           <p>{winStatus}</p>
+          {winStatus == 'LOSS' && <p>Word is: {originalWord}</p>}
           <button
             onClick={() => {
               innerQueryClient.clear();
