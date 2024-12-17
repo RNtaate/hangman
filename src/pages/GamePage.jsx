@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
+import Spinner from 'react-activity/dist/Spinner';
+import 'react-activity/dist/Spinner.css';
+
 import KeyBoard from '../components/KeyBoard';
 import HangmanCanvas from '../components/HangmanCanvas';
 import PlayedWord from '../components/PlayedWord';
@@ -60,7 +63,16 @@ const GamePage = () => {
   }, []);
 
   if (isLoading || isFetching) {
-    return <div>Loading ...</div>;
+    return (
+      <div className="w-full h-full flex flex-col justify-center items-center gap-5 text-slate-700 py-20">
+        <Spinner size={50} />
+        <span className="text-sm">
+          {playerMode == playerModes.double
+            ? 'Confirming word...'
+            : 'Fetching word...'}
+        </span>
+      </div>
+    );
   }
 
   if (status == 'error') {
