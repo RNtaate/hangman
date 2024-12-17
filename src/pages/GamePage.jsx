@@ -14,6 +14,7 @@ import {
 import { playerModes } from '../services/letters';
 import WordInput from '../components/WordInput';
 import { queryClient } from '../main';
+import GameOverComponent from '../components/GameOverComponent';
 
 const GamePage = () => {
   const {
@@ -91,7 +92,8 @@ const GamePage = () => {
 
   return (
     <div className="flex flex-col md:justify-around md:min-h-screen md:max-h-screen relative">
-      {gameOver && (
+      {gameOver && <GameOverComponent />}
+      {/* {gameOver && (
         <>
           {winStatus == 'WIN' && (
             <Confetti
@@ -126,7 +128,7 @@ const GamePage = () => {
             </button>
           </div>
         </>
-      )}
+      )} */}
       <HangmanCanvas />
       <PlayedWord />
       <KeyBoard />
