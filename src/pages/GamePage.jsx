@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
-import Confetti from 'react-confetti';
-import { useWindowSize } from '@react-hook/window-size';
+import { useQuery } from '@tanstack/react-query';
 import KeyBoard from '../components/KeyBoard';
 import HangmanCanvas from '../components/HangmanCanvas';
 import PlayedWord from '../components/PlayedWord';
@@ -13,26 +11,20 @@ import {
 } from '../helpers/helperMethods';
 import { playerModes } from '../services/letters';
 import WordInput from '../components/WordInput';
-import { queryClient } from '../main';
 import GameOverComponent from '../components/GameOverComponent';
 
 const GamePage = () => {
   const {
     gameOver,
-    winStatus,
     playerMode,
-    originalWord,
     setOriginalWord,
     setWordObject,
     doublePlayerWordChoice,
     setDoublePlayerWordChoice,
     playGame,
-    resetGame,
   } = getContextValues();
 
   const navigate = useNavigate();
-  const innerQueryClient = useQueryClient(queryClient);
-  const [width, height] = useWindowSize();
 
   const { status, data, isLoading, error, isFetching } = useQuery({
     queryKey: ['word'],
@@ -93,42 +85,6 @@ const GamePage = () => {
   return (
     <div className="flex flex-col md:justify-around md:min-h-screen md:max-h-screen relative">
       {gameOver && <GameOverComponent />}
-      {/* {gameOver && (
-        <>
-          {winStatus == 'WIN' && (
-            <Confetti
-              width={width}
-              height={height}
-              recycle={false}
-              numberOfPieces={1000}
-            />
-          )}
-          <div className="absolute top-0 left-0 right-0 bottom-0">
-            GAME OVER
-            <p>{winStatus}</p>
-            {winStatus == 'LOSS' && <p>Word is: {originalWord}</p>}
-            <button
-              onClick={() => {
-                innerQueryClient.clear();
-                innerQueryClient.invalidateQueries({ queryKey: ['word'] });
-                resetGame();
-              }}
-            >
-              Play Again
-            </button>
-            <button
-              className="block"
-              onClick={() => {
-                innerQueryClient.clear();
-                innerQueryClient.invalidateQueries({ queryKey: ['word'] });
-                resetGame(false);
-              }}
-            >
-              Quit
-            </button>
-          </div>
-        </>
-      )} */}
       <HangmanCanvas />
       <PlayedWord />
       <KeyBoard />
