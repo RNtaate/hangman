@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { getContextValues } from '../context/GameContextProvider';
 
 const WordInput = ({ incomingError = '' }) => {
   const { setDoublePlayerWordChoice } = getContextValues();
   const [wordInput, setWordInput] = useState('');
   const [wordError, setWordError] = useState(incomingError);
+  const [reveal, setReveal] = useState(false);
+
+  const inputRef = useRef();
+  const spanRef = useRef();
 
   const handleInputChange = (ev) => {
     let writtenWord = ev.target.value.trim();
@@ -14,6 +18,17 @@ const WordInput = ({ incomingError = '' }) => {
       setWordError('');
     } else {
       setWordInput('');
+    }
+  };
+
+  const handleRevealingWord = () => {
+    if (inputRef.current) {
+      if (reveal) {
+        inputRef.current.type = 'password';
+      } else {
+        inputRef.current.type = 'text';
+      }
+      setReveal(!reveal);
     }
   };
 
@@ -35,16 +50,26 @@ const WordInput = ({ incomingError = '' }) => {
           <label htmlFor="word" className="text-sm text-center text-slate-600">
             Player one, enter a word between 3 and 15 letters long:
           </label>
-          <input
-            type="text"
-            id="word"
-            placeholder="Enter your word here"
-            autoComplete="off"
-            maxLength={15}
-            minLength={3}
-            className="outline-none border-b border-slate-400 py-2 caret-slate-400 px-3"
-            onChange={handleInputChange}
-          />
+          <div className="bg-red-400 relative">
+            <input
+              type="password"
+              id="word"
+              ref={inputRef}
+              placeholder="Enter your word here"
+              autoComplete="off"
+              maxLength={15}
+              minLength={3}
+              className="outline-none border-b border-slate-400 py-1 caret-slate-400 px-3 inline-block w-full"
+              onChange={handleInputChange}
+            />
+            <span
+              ref={spanRef}
+              className="absolute right-0 px-2 top-0 bottom-0 flex items-center cursor-pointer text-xs text-sky-300 select-none"
+              onClick={handleRevealingWord}
+            >
+              {reveal ? 'HIDE' : 'SHOW'}
+            </span>
+          </div>
           <button
             type="submit"
             className="w-full bg-sky-400 p-1 text-white rounded-md text-xl"
