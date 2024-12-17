@@ -33,18 +33,26 @@ const GameOverComponent = () => {
         />
       )}
       <div
-        className={`w-full h-[75%] rounded-xl flex flex-col justify-center items-center gap-3 ${winStatus == 'WIN' ? 'bg-green-300' : 'bg-red-400'} shadow-lg`}
+        className={`w-full h-[75%] rounded-xl flex flex-col justify-center items-center gap-4 ${winStatus == 'WIN' ? 'bg-green-300/[0.8]' : 'bg-red-400/[0.8]'} shadow-lg px-5`}
       >
-        {/* <h3 className="text-2xl text-slate-700">GAME OVER</h3> */}
-        <p className="text-xl text-slate-700">
+        <p className="text-2xl text-slate-700">
           {winStatus == 'WIN' ? 'YAY! YOU WIN' : 'SORRY!!, YOU LOSE'}
         </p>
-        {winStatus == 'LOSS' && <p>Word is: {originalWord}</p>}
-        <button type="button" onClick={handleRestartingOrResettingGame}>
+
+        <div className="text-slate-700">
+          Word is : <b>{originalWord}</b>
+        </div>
+
+        <button
+          type="button"
+          className="bg-sky-400 text-white w-full py-3 rounded-xl  active:scale-[0.9] transition-all delay-0 shadow-lg"
+          onClick={handleRestartingOrResettingGame}
+        >
           Play Again
         </button>
         <button
           type="button"
+          className="text-white bg-red-700 w-full py-3 rounded-xl active:scale-[0.9] transition-all shadow-lg"
           onClick={() => handleRestartingOrResettingGame(false)}
         >
           Quit

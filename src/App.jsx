@@ -2,11 +2,8 @@ import { useState } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './App.css';
 import HomePage from './pages/HomePage';
-import WordInput from './components/WordInput';
 import GamePage from './pages/GamePage';
-import GameContextProvider, {
-  getContextValues,
-} from './context/GameContextProvider';
+import GameContextProvider from './context/GameContextProvider';
 import ErrorPage from './pages/ErrorPage';
 import PrivateRoute from './pages/PrivateRoute';
 
