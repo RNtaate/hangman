@@ -59,6 +59,7 @@ const drawOnCanvas = (canvas, count) => {
       Math.PI * 2
     );
     ctx.lineWidth = count > 3 ? 4 : 2;
+    ctx.lineCap = 'round';
     ctx.strokeStyle = count > 3 ? 'red' : 'black';
     ctx.stroke();
     ctx.closePath();
@@ -67,6 +68,7 @@ const drawOnCanvas = (canvas, count) => {
     ctx.moveTo(lineCoords[count].mt.x, lineCoords[count].mt.y);
     ctx.lineTo(lineCoords[count].lt.x, lineCoords[count].lt.y);
     ctx.lineWidth = count > 3 ? 4 : 2;
+    ctx.lineCap = 'round';
     ctx.strokeStyle = count > 3 ? 'red' : 'black';
     ctx.stroke();
     ctx.closePath();
