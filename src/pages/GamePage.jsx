@@ -96,7 +96,7 @@ const GamePage = () => {
 
   return (
     <div className="flex flex-col md:justify-around md:min-h-screen md:max-h-screen relative">
-      {gameOver && <GameOverComponent />}
+      <GameOverComponent />
       <HangmanCanvas />
       <PlayedWord />
       <KeyBoard />

@@ -7,7 +7,7 @@ import Confetti from 'react-confetti';
 import { useWindowSize } from '@react-hook/window-size';
 
 const GameOverComponent = () => {
-  const { winStatus, resetGame, originalWord } = getContextValues();
+  const { winStatus, resetGame, originalWord, gameOver } = getContextValues();
 
   const innerQueryClient = useQueryClient(queryClient);
   const [width, height] = useWindowSize();
@@ -23,7 +23,9 @@ const GameOverComponent = () => {
   };
 
   return (
-    <section className="fixed md:absolute top-0 left-0 right-0 bottom-0 bg-slate-900/[0.7] z-10 px-10 py-20">
+    <section
+      className={`fixed md:absolute top-0 left-0 right-0 bottom-0 bg-slate-900/[0.7] z-10 px-10 py-20 ${gameOver ? 'scale-100' : 'scale-0'} transition-all duration-[500ms]`}
+    >
       {winStatus == 'WIN' && (
         <Confetti
           width={width}
