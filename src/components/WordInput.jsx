@@ -24,9 +24,9 @@ const WordInput = ({ incomingError = '' }) => {
   const handleRevealingWord = () => {
     if (inputRef.current) {
       if (reveal) {
-        inputRef.current.type = 'password';
+        inputRef.current.classList.add('text-change');
       } else {
-        inputRef.current.type = 'text';
+        inputRef.current.classList.remove('text-change');
       }
       setReveal(!reveal);
     }
@@ -56,14 +56,14 @@ const WordInput = ({ incomingError = '' }) => {
           </label>
           <div className="bg-red-400 relative">
             <input
-              type="password"
+              type="text"
               id="word"
               ref={inputRef}
               placeholder="Enter your word here"
               autoComplete="off"
               maxLength={15}
               minLength={3}
-              className="outline-none border-b border-slate-400 py-1 caret-slate-400 px-3 inline-block w-full"
+              className="text-change outline-none border-b border-slate-400 py-1 caret-slate-400 px-3 inline-block w-full"
               onChange={handleInputChange}
             />
             <span

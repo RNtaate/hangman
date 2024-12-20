@@ -13,3 +13,7 @@
 body {
   font-family: 'Roboto', serif;
 }
+
+.text-change {
+  -webkit-text-security: disc;
+}
