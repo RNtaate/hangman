@@ -28,7 +28,7 @@ function App() {
 
   return (
     <GameContextProvider>
-      <div className="min-w-[360px] max-w-[500px] relative min-h-screen max-h-screen overflow-hidden">
+      <div className="min-w-[360px] max-w-[500px] relative min-h-screen max-h-screen overflow-hidden mx-auto">
         <RouterProvider router={router} />
       </div>
     </GameContextProvider>
